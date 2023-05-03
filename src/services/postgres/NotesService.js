@@ -40,7 +40,7 @@ class NoteService{
         }
         const result = await this._pool.query(query);
         
-        if(!result.row.length){
+        if(!result.rows.length){
             throw new NotFoundError('Catatan tidak ditemukan');
         }
         
