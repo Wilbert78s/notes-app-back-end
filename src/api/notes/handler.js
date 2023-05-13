@@ -49,7 +49,7 @@ class NotesHandler {
     }
   }
  
-  async getNotesHandler() {
+  async getNotesHandler(request) {    
     const { id: credentialId } = request.auth.credentials;
     const notes = await this._service.getNotes(credentialId);
     return {
@@ -59,12 +59,11 @@ class NotesHandler {
       },
     };
   }
- 
+
   async getNoteByIdHandler(request, h) {
     try {
       const { id } = request.params;
       const { id: credentialId } = request.auth.credentials;
-      
       await this._service.verifyNoteOwner(id, credentialId);
       const note = await this._service.getNoteById(id);
       return {
